@@ -3,6 +3,7 @@ from gql import gql
 from pydantic import BaseModel
 from platzky import Engine
 
+
 def json_db_get_redirections(self):
     return self.data.get("redirections", {})
 
@@ -96,7 +97,7 @@ def redirect_with_name(destination, code, name):
     return named_redirect
 
 
-def process(app: Engine , config: dict[str, str]) -> Engine:
+def process(app: Engine, config: dict[str, str]) -> Engine:
     redirections = parse_redirections(config)
     setup_routes(app, redirections)
     return app
