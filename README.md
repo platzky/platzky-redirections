@@ -14,12 +14,13 @@ pip install platzky-redirections
 
 ### Usage
 
-
-      "plugins": [
-        {
-          "name": "redirections",
-          "config": {
-            "/old-path": "/new-path"
-          }
-        }
-      ]
+```json
+"plugins": [
+{
+  "name": "redirections",
+  "config": {
+    "/old-path": "/new-path"
+  }
+}
+]
+```
