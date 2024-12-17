@@ -41,20 +41,23 @@ class Redirection(BaseModel):
 def parse_redirections(config: dict[str, str]) -> list[Redirection]:
     """
     Parse and validate redirection configuration.
-    
+
     Args:
         config: Dictionary mapping source URLs to destination URLs
-    
+
     Returns:
         List of validated Redirection objects
-    
+
     Raises:
         ValueError: If URLs are malformed
     """
-    def validate_url(url: str) -> bool:
-        return url.startswith('/') or url.startswith('http')
 
-    invalid_urls = [url for url in config.keys() | config.values() if not validate_url(url)]
+    def validate_url(url: str) -> bool:
+        return url.startswith("/") or url.startswith("http")
+
+    invalid_urls = [
+        url for url in config.keys() | config.values() if not validate_url(url)
+    ]
     if invalid_urls:
         raise ValueError(f"Invalid URLs found: {invalid_urls}")
 
@@ -67,11 +70,11 @@ def parse_redirections(config: dict[str, str]) -> list[Redirection]:
 def setup_routes(app, redirections):
     """
     Set up Flask routes for redirections.
-    
+
     Args:
         app: Flask application instance
         redirections: List of Redirection objects
-    
+
     Raises:
         ValueError: If route conflicts are detected
     """
