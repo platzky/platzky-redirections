@@ -1,1 +1,1 @@
-from .entrypoint import process
+from platzky_redirections.entrypoint import process as process
