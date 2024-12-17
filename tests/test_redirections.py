@@ -14,13 +14,9 @@ def test_plugin_loader():
         "DB": {
             "TYPE": "json",
             "DATA": {
-                "site_content": {
-                    "pages": []
-                },
+                "site_content": {"pages": []},
                 "plugins": [
-                    {
-                    "name": "redirections", "config": {"/page/test": "/page/test2"}
-                    }
+                    {"name": "redirections", "config": {"/page/test": "/page/test2"}}
                 ],
             },
         },
