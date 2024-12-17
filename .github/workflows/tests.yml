@@ -30,7 +30,7 @@ jobs:
     - name: Run tests with coverage
       run: make coverage
     - name: Coveralls
-      uses: coverallsapp/github-action@master
+      uses: coverallsapp/github-action@v1
       with:
         path-to-lcov: "./coverage.lcov"
         github-token: ${{ secrets.GITHUB_TOKEN }}
