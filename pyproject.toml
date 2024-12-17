@@ -9,9 +9,12 @@ readme = "README.md"
 [tool.poetry.dependencies]
 python = "^3.10"
 pydantic = "^2.10.3"
-flask = "^3.1.0"
-pytest = "^8.3.4"
+gql = "^3.5.0"
 
+
+[tool.poetry.group.dev.dependencies]
+pytest = "^8.3.4"
+platzky = "^0.2.13"
 
 [build-system]
 requires = ["poetry-core"]
