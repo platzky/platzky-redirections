@@ -1,36 +1,8 @@
 from flask import redirect
-from gql import gql
 from pydantic import BaseModel
-from platzky import Engine
 
-
-def json_db_get_redirections(self):
-    return self.data.get("redirections", {})
-
-
-def json_file_db_get_redirections(self):
-    return json_db_get_redirections(self)
-
-
-def google_json_db_get_redirections(self):
-    return self.data.get("redirections", {})
-
-
-def graph_ql_db_get_redirections(self):
-    redirections = gql(
-        """
-        query MyQuery{
-          redirections(stage: PUBLISHED){
-            source
-            destination
-          }
-        }
-        """
-    )
-    return {
-        x["source"]: x["destination"]
-        for x in self.client.execute(redirections)["redirections"]
-    }
+from platzky.plugin.plugin import PluginBase, PluginBaseConfig
+from platzky.engine import Engine
 
 
 class Redirection(BaseModel):
@@ -100,7 +72,8 @@ def redirect_with_name(destination, code, name):
     return named_redirect
 
 
-def process(app: Engine, config: dict[str, str]) -> Engine:
-    redirections = parse_redirections(config)
-    setup_routes(app, redirections)
-    return app
+class RedirectionsPlugin(PluginBase[PluginBaseConfig]):
+    def process(self, app: Engine) -> Engine:
+        redirections = parse_redirections(self.config.model_extra or {})
+        setup_routes(app, redirections)
+        return app

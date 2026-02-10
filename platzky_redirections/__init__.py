@@ -1,1 +1,1 @@
-from platzky_redirections.entrypoint import process as process
+from platzky_redirections.entrypoint import RedirectionsPlugin as RedirectionsPlugin
