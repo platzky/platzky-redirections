@@ -32,7 +32,7 @@ def parse_redirections(config: dict[str, str]) -> list[Redirection]:
 
     def validate_url(url: str) -> bool:
         """Check that a URL starts with '/' or 'http'."""
-        return url.startswith("/") or url.startswith("http")
+        return url.startswith(("/", "http"))
 
     invalid_urls = [url for url in config.keys() | config.values() if not validate_url(url)]
     if invalid_urls:
