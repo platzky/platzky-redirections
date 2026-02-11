@@ -23,7 +23,7 @@ html-cov: coverage
 	poetry run coverage html
 
 audit:
-	poetry run pip-audit
+	poetry audit --ignore-package=py
 
 build:
 	poetry build
