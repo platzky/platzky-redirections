@@ -66,12 +66,12 @@ def setup_routes(app, redirections):
         app.route(rule=redirection.source)(func)
 
 
-def redirect_with_name(destination, code, name):
+def redirect_with_name(destination: str, code: int, name: str):
     """Create a named redirect function for use as a Flask view."""
 
-    def named_redirect(*args, **kwargs):
+    def named_redirect():
         """Return a Flask redirect response."""
-        return redirect(destination, code, *args, **kwargs)
+        return redirect(destination, code)
 
     named_redirect.__name__ = name
     return named_redirect
