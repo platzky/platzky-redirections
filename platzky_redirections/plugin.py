@@ -1,9 +1,12 @@
 """Platzky redirections plugin — registers 301 redirect routes from config."""
 
+from collections.abc import Callable
+
 from flask import redirect
 from platzky.engine import Engine
 from platzky.plugin.plugin import PluginBase, PluginBaseConfig
 from pydantic import BaseModel
+from werkzeug.wrappers import Response
 
 
 class Redirection(BaseModel):
@@ -41,7 +44,7 @@ def parse_redirections(config: dict[str, str]) -> list[Redirection]:
     ]
 
 
-def setup_routes(app, redirections):
+def setup_routes(app: Engine, redirections: list[Redirection]) -> None:
     """
     Set up Flask routes for redirections.
 
@@ -52,7 +55,7 @@ def setup_routes(app, redirections):
     Raises:
         ValueError: If route conflicts are detected
     """
-    existing_routes = set(rule.rule for rule in app.url_map.iter_rules())
+    existing_routes: set[str] = set(rule.rule for rule in app.url_map.iter_rules())
     conflicts = [r.source for r in redirections if r.source in existing_routes]
     if conflicts:
         raise ValueError(f"Route conflicts detected: {conflicts}")
@@ -66,10 +69,10 @@ def setup_routes(app, redirections):
         app.route(rule=redirection.source)(func)
 
 
-def redirect_with_name(destination: str, code: int, name: str):
+def redirect_with_name(destination: str, code: int, name: str) -> Callable[..., Response]:
     """Create a named redirect function for use as a Flask view."""
 
-    def named_redirect():
+    def named_redirect() -> Response:
         """Return a Flask redirect response."""
         return redirect(destination, code)
 

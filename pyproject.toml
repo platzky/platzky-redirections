@@ -9,7 +9,6 @@ readme = "README.md"
 [tool.poetry.dependencies]
 python = "^3.10"
 pydantic = "^2.10.3"
-gql = "^3.5.0"
 platzky = "^1.4.2"
 
 [tool.poetry.group.dev.dependencies]
@@ -46,16 +45,16 @@ pythonPlatform = "All"
 typeCheckingMode = "strict"
 reportMissingImports = true
 reportMissingTypeStubs = false
-reportMissingParameterType = false
-reportUnknownArgumentType = false
-reportUnknownMemberType = false
-reportUnknownVariableType = false
-reportUnknownParameterType = false
+reportMissingParameterType = true
+reportUnknownArgumentType = true
+reportUnknownMemberType = true
+reportUnknownVariableType = true
+reportUnknownParameterType = true
 reportUnnecessaryTypeIgnoreComment = true
 reportUntypedClassDecorator = false
 reportUntypedFunctionDecorator = false
 reportUnnecessaryIsInstance = false
-reportUnusedFunction = false
+reportUnusedFunction = true
 reportUntypedBaseClass = false
 
 [tool.pytest.ini_options]
