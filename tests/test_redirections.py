@@ -1,7 +1,6 @@
 from typing import Any, Dict
 
-
-from platzky.platzky import create_app_from_config, Config
+from platzky.platzky import Config, create_app_from_config
 
 
 def test_plugin_loader():
@@ -15,9 +14,7 @@ def test_plugin_loader():
             "TYPE": "json",
             "DATA": {
                 "site_content": {"pages": []},
-                "plugins": [
-                    {"name": "redirections", "config": {"/page/test": "/page/test2"}}
-                ],
+                "plugins": [{"name": "redirections", "config": {"/page/test": "/page/test2"}}],
             },
         },
     }

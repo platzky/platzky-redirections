@@ -1,1 +1,8 @@
-from platzky_redirections.entrypoint import RedirectionsPlugin as RedirectionsPlugin
+from platzky_redirections.plugin import RedirectionsPlugin
+
+Plugin = RedirectionsPlugin
+
+__all__ = [
+    "Plugin",
+    "RedirectionsPlugin",
+]
