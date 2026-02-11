@@ -36,6 +36,7 @@ select = [
     "F",
     "E",
     "W",
+    "PT",
     "RUF",
 ]
 
@@ -72,6 +73,7 @@ ignore-semiprivate = false
 exclude = ["tests", "docs"]
 
 [tool.semantic_release]
+allow_zero_version = true
 major_on_zero = false
 version_toml = ["pyproject.toml:tool.poetry.version"]
 build_command = "poetry build"
