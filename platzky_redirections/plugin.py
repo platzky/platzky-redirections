@@ -80,8 +80,6 @@ def redirect_with_name(destination, code, name):
 class RedirectionsConfig(PluginBaseConfig):
     """Configuration model for the redirections plugin."""
 
-    pass
-
 
 class RedirectionsPlugin(PluginBase[RedirectionsConfig]):
     """Platzky plugin that registers URL redirections as Flask 301 routes."""
