@@ -9,7 +9,6 @@ on:
       - 'docs/**'
       - 'LICENSE'
       - '.gitignore'
-      - 'CHANGELOG.md'
   push:
     branches:
       - main
@@ -18,7 +17,6 @@ on:
       - 'docs/**'
       - 'LICENSE'
       - '.gitignore'
-      - 'CHANGELOG.md'
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
