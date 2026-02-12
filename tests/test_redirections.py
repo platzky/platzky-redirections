@@ -3,7 +3,7 @@ from typing import Any, Dict
 import pytest
 from platzky.platzky import Config, create_app_from_config
 
-from platzky_redirections.plugin import parse_redirections, setup_routes, Redirection
+from platzky_redirections.plugin import Redirection, parse_redirections, setup_routes
 
 
 def test_plugin_loader():
