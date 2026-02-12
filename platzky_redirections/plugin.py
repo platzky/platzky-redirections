@@ -1,6 +1,7 @@
 """Platzky redirections plugin — registers 301 redirect routes from config."""
 
 from collections.abc import Callable
+from typing import Any
 
 from flask import redirect
 from platzky.engine import Engine
@@ -16,7 +17,7 @@ class Redirection(BaseModel):
     destination: str
 
 
-def parse_redirections(config: dict[str, str]) -> list[Redirection]:
+def parse_redirections(config: dict[str, Any]) -> list[Redirection]:
     """
     Parse and validate redirection configuration.
 
@@ -27,12 +28,17 @@ def parse_redirections(config: dict[str, str]) -> list[Redirection]:
         List of validated Redirection objects
 
     Raises:
-        ValueError: If URLs are malformed
+        ValueError: If URLs are malformed or values are not strings
     """
+    non_string_entries = {
+        k: v for k, v in config.items() if not isinstance(k, str) or not isinstance(v, str)
+    }
+    if non_string_entries:
+        raise ValueError(f"All keys and values must be strings, got: {non_string_entries}")
 
     def validate_url(url: str) -> bool:
-        """Check that a URL starts with '/' or 'http'."""
-        return url.startswith(("/", "http"))
+        """Check that a URL starts with '/' or 'http://' or 'https://'."""
+        return url.startswith(("/", "http://", "https://"))
 
     invalid_urls = [url for url in config.keys() | config.values() if not validate_url(url)]
     if invalid_urls:
