@@ -10,6 +10,10 @@ coverage.lcov
 # build specific artifacts
 dist
 
+# virtual environments
+venv/
+.venv/
+env/
 
 # IDE-specific directories
 .vscode
