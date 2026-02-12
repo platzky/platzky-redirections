@@ -61,7 +61,7 @@ def setup_routes(app: Engine, redirections: list[Redirection]) -> None:
     Raises:
         ValueError: If route conflicts are detected
     """
-    existing_routes: set[str] = set(rule.rule for rule in app.url_map.iter_rules())
+    existing_routes: set[str] = {rule.rule for rule in app.url_map.iter_rules()}
     conflicts = [r.source for r in redirections if r.source in existing_routes]
     if conflicts:
         raise ValueError(f"Route conflicts detected: {conflicts}")
@@ -75,7 +75,7 @@ def setup_routes(app: Engine, redirections: list[Redirection]) -> None:
         app.route(rule=redirection.source)(func)
 
 
-def redirect_with_name(destination: str, code: int, name: str) -> Callable[..., Response]:
+def redirect_with_name(destination: str, code: int, name: str) -> Callable[[], Response]:
     """Create a named redirect function for use as a Flask view."""
 
     def named_redirect() -> Response:
